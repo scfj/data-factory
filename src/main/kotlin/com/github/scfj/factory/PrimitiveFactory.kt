@@ -28,18 +28,20 @@ object PrimitiveFactory {
             Array<Any>::class.java to { arrayOf<Any>() }
     )
 
+    @Suppress("unchecked")
     private fun <T> createPrimitive(type: Class<T>): T? {
         if (primitives.containsKey(type)) {
-            return primitives[type]?.invoke() as T
+            return primitives[type]?.invoke() as T?
         }
         for ((t, v) in primitives) {
             if (type.isAssignableFrom(t)) {
-                return v.invoke() as T
+                return v.invoke() as T?
             }
         }
         return null
     }
 
+    @Suppress("unchecked")
     private fun <T> createObject(type: Class<T>): T {
         val ctor = type.constructors.simplest
                 ?: throw IllegalArgumentException("Type $type must have at least one public ctor")

@@ -46,7 +46,7 @@ class KFactory<T : Any>(private val type: KClass<T>) {
 
     private fun <E : Any> noConstructorError(): E {
         throw IllegalArgumentException(
-                "$type have no constructor that can be invoked with arguments ${ctorArguments.keys}"
+                "$type has no constructor that can be invoked with arguments ${ctorArguments.keys}"
         )
     }
 }
